@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+import os
 from django.http import HttpResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
@@ -15,7 +16,8 @@ def map(request):
 
 
 def input_data(request):
-    path = r'/Users/zhaoyuwen/waibao/XS-Group/tracker/data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv'
+    base_path = os.getcwd()
+    path = os.path.join(base_path, 'data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, elements in enumerate(lines):
