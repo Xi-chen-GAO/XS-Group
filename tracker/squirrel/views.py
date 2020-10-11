@@ -2,9 +2,12 @@ from django.shortcuts import render
 
 # Create your views here.
 import os
-from django.http import HttpResponse
+import json
+from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
+from django.forms.models import model_to_dict
+
 
 
 def map(request):
@@ -14,6 +17,7 @@ def map(request):
     }
     return render(request, 'squirrel/map.html', context)
 
+
 def sightings(request):
     sightings = Squirrel.objects.all()
     context = {
@@ -21,13 +25,27 @@ def sightings(request):
     }
     return render(request, 'squirrel/sightings.html', context)
 
+
+def squirrel(request, unique_squirrel_id):
+    method = request.method
+    squirrel = Squirrel.objects.filter(unique_squirrel_id=unique_squirrel_id).first()
+    if not squirrel:
+        return
+
+    if method == 'GET':
+        squirrel_dict = model_to_dict(squirrel)
+    else:
+        pass
+    return JsonResponse(squirrel_dict)
+
+
 def input_data(request):
     base_path = os.getcwd()
     path = os.path.join(base_path, 'data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, elements in enumerate(lines):
-            if index == 1:
+            if 1<=index <= 50:
                 sq_info = elements.split(",")
                 create_dict = {
                     "x": sq_info[0],

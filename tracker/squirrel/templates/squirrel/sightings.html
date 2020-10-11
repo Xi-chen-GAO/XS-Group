@@ -7,24 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Cover Template · Bootstrap</title>
+    <title>Sightings</title>
 
     <link rel="canonical" href="https://v4.bootcss.com/docs/examples/cover/">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/assets/img/favicons/apple-touch-icon.png"
-          sizes="180x180">
-    <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon-32x32.png" sizes="32x32"
-          type="image/png">
-    <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon-16x16.png" sizes="16x16"
-          type="image/png">
-    <link rel="mask-icon" href="https://v4.bootcss.com/docs/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-    <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon.ico">
-    <meta name="msapplication-config" content="/docs/assets/img/favicons/browserconfig.xml">
+    
     <meta name="theme-color" content="#563d7c">
 
 
@@ -44,15 +34,14 @@
         }
       }
 
-
-
-
-
-
-
     </style>
     <!-- Custom styles for this template -->
     <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
 </head>
 <body class="text-center" cz-shortcut-listen="true">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -61,7 +50,7 @@
             <h3 class="masthead-brand">Sightings</h3>
             <nav class="nav nav-masthead justify-content-center">
                 <button type="button" class="btn btn-primary">add Sighting</button>
-<!--                <a class="nav-link active">add Sighting</a>-->
+                <!--                <a class="nav-link active">add Sighting</a>-->
                 <!--                <a class="nav-link" href="https://v4.bootcss.com/docs/examples/cover/#">Features</a>-->
                 <!--                <a class="nav-link" href="https://v4.bootcss.com/docs/examples/cover/#">Contact</a>-->
             </nav>
@@ -91,7 +80,10 @@
                 <td>{{ sighting.unique_squirrel_id }}</td>
                 <td>{{ sighting.date }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary">edit</button>
+                    <button type="button" class="btn btn-primary edit" data-toggle="modal" data-target="#exampleModal"
+                            data-key="{{ sighting.unique_squirrel_id }}">
+                        edit
+                    </button>
                 </td>
             </tr>
 
@@ -99,7 +91,70 @@
 
             </tbody>
         </table>
+
     </footer>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:black;">松鼠详情</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--输入框-->
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Latitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="latitude">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Longitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="longitude">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Unique Squirrel ID</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="uniqueSquirrelID">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Shift</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="shift">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Date</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="date">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Age</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="age">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -107,4 +162,38 @@
 <div style="all: initial;">
     <div></div>
 </div>
+<script>
+var log = function() {
+    console.log.apply(console, arguments)
+}
+var e = function(sel) {
+    return document.querySelector(sel)
+}
+var getSetInfo = function(id) {
+    var path = "/sightings/"+id;
+    $.ajax({
+        url: path,
+        type: 'get',
+        success:function(result){
+            setInfo(result)
+        }
+     })
+}
+
+var setInfo = function(info) {
+    $('#latitude').val(info.x);
+    $('#longitude').val(info.y);
+    $('#uniqueSquirrelID').val(info.unique_squirrel_id);
+    $('#shift').val(info.shift);
+    $('#date').val(info.date);
+    $('#age').val(info.age);
+}
+$(document).on("click",".edit",function(){
+    var id = $(this).data("key")
+    getSetInfo(id)
+});
+
+
+
+</script>
 </html>
