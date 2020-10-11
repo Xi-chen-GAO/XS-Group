@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
+
     <meta name="theme-color" content="#563d7c">
 
 
@@ -169,15 +169,31 @@ var log = function() {
 var e = function(sel) {
     return document.querySelector(sel)
 }
-var getSetInfo = function(id) {
+var getInfoFromBackend = function(id) {
     var path = "/sightings/"+id;
     $.ajax({
         url: path,
         type: 'get',
         success:function(result){
             setInfo(result)
+            getInfoFromPage()
         }
      })
+}
+
+var addOrUpdateInfo = function(id) {
+    var path = "/sightings/"+id;
+    var params = getInfoFromPage()
+
+    $.ajax({
+        url: path,
+        data: params,
+        dataType: "json", // 服务器响应的数据类型
+        type: "POST", // 请求方式
+        success: function (data) {
+            console.log(data)
+        }
+    });
 }
 
 var setInfo = function(info) {
@@ -188,9 +204,21 @@ var setInfo = function(info) {
     $('#date').val(info.date);
     $('#age').val(info.age);
 }
+
+var getInfoFromPage = function(info) {
+    var info = {
+        x: $('#latitude').val(),
+        y: $('#longitude').val(),
+        unique_squirrel_id: $('#uniqueSquirrelID').val(),
+        shift: $('#shift').val(),
+        date: $('#date').val(),
+        age: $('#age').val(),
+    }
+    return info
+}
 $(document).on("click",".edit",function(){
     var id = $(this).data("key")
-    getSetInfo(id)
+    getInfoFromBackend(id)
 });
 
 
