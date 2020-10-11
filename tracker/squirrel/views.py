@@ -7,11 +7,9 @@ from squirrel.models import Squirrel
 
 
 def map(request):
+    sightings = Squirrel.objects.all()
     context = {
-        'sightings': [{
-            'latitude': 40.782091,
-            'longitude': -73.964285,
-        }]
+        'sightings': sightings
     }
     return render(request, 'squirrel/map.html', context)
 

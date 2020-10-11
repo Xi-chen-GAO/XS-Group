@@ -23,6 +23,7 @@
         height: 100%;
       }
 
+
     </style>
 </head>
 <body>
@@ -59,12 +60,11 @@
         <!-- L.Icon.Default.prototype.options.shadowSize = 15; -->
         <!-- L.Icon.Default.prototype.options.shadowAnchor = [0, 0]; -->
 
-<!--        {% for sighting in sightings %}-->
-<!--          var point_lat_lon = [{{ sighting.latitude }}, {{ sighting.longitude }}];-->
-<!--          var marker = L.marker(point_lat_lon).addTo(map);-->
-<!--        {% endfor %}-->
-          var point_lat_lon = [40.782091, -73.964285];
+        {% for sighting in sightings %}
+          var point_lat_lon = [{{ sighting.x }}, {{ sighting.y }}];
           var marker = L.marker(point_lat_lon).addTo(map);
+        {% endfor %}
+
 
 </script>
 </body>
