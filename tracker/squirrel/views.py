@@ -14,6 +14,12 @@ def map(request):
     }
     return render(request, 'squirrel/map.html', context)
 
+def sightings(request):
+    sightings = Squirrel.objects.all()
+    context = {
+        'sightings': sightings
+    }
+    return render(request, 'squirrel/sightings.html', context)
 
 def input_data(request):
     base_path = os.getcwd()
