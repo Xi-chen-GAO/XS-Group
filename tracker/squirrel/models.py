@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 
-class Question(models.Model):
+class Squirrel(models.Model):
     x = models.CharField(max_length=200, null=True)
     y = models.CharField(max_length=200, null=True)
     unique_squirrel_id = models.CharField(max_length=200, null=True)
