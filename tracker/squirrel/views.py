@@ -1,13 +1,12 @@
-from django.shortcuts import render
-
 # Create your views here.
 import os
-import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
-from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
+from squirrel.squirrel_operation import SquirrelOperation
+
+squirrel_operation = SquirrelOperation()
 
 
 def map(request):
@@ -28,20 +27,11 @@ def sightings(request):
 
 @csrf_exempt
 def squirrel(request, unique_squirrel_id):
-    """
-    :param request:
-    :param unique_squirrel_id:
-    :return:
-    """
     method = request.method
-    squirrel = Squirrel.objects.filter(unique_squirrel_id=unique_squirrel_id).first()
-    if not squirrel:
-        return
 
     if method == 'GET':
-        squirrel_dict = model_to_dict(squirrel)
-        return JsonResponse(squirrel_dict)
-
+        squirrel_info = squirrel_operation.get_info(unique_squirrel_id)
+        return JsonResponse(squirrel_info)
     else:
         x = request.POST.get('x')
         y = request.POST.get('y')
@@ -50,13 +40,7 @@ def squirrel(request, unique_squirrel_id):
         date = request.POST.get('date')
         age = request.POST.get('age')
 
-        squirrel.x = x
-        squirrel.y = y
-        squirrel.unique_squirrel_id = unique_squirrel_id
-        squirrel.shift = shift
-        squirrel.date = date
-        squirrel.age = age
-        squirrel.save()
+        squirrel_operation.update(x, y, unique_squirrel_id, shift, date, age)
         res = {
             'status': 'success',
         }
@@ -88,30 +72,9 @@ def squirrel_add(request):
     indifferent = request.POST.get('indifferent')
     runs_from = request.POST.get('runs_from')
 
-    squirrel = Squirrel()
-    squirrel.x = x
-    squirrel.y = y
-    squirrel.unique_squirrel_id = unique_squirrel_id
-    squirrel.shift = shift
-    squirrel.date = date
-    squirrel.age = age
-    squirrel.primary_fur_color = primary_fur_color
-    squirrel.location = location
-    squirrel.specific_location = specific_location
-    squirrel.running = running
-    squirrel.chasing = chasing
-    squirrel.climbing = climbing
-    squirrel.eating = eating
-    squirrel.foraging = foraging
-    squirrel.other_activities = other_activities
-    squirrel.kuks = kuks
-    squirrel.moans = moans
-    squirrel.tail_flags = tail_flags
-    squirrel.tail_twitches = tail_twitches
-    squirrel.approaches = approaches
-    squirrel.indifferent = indifferent
-    squirrel.runs_from = runs_from
-    squirrel.save()
+    squirrel_operation.create(x, y, unique_squirrel_id, shift, date, age, primary_fur_color, location,
+                              specific_location, running, chasing, climbing, eating, foraging, other_activities, kuks,
+                              moans, tail_flags, tail_twitches, approaches, indifferent, runs_from)
     res = {
         'status': 'success',
     }
