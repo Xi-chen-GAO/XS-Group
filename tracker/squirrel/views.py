@@ -3,11 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 import os
 import json
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
 from django.forms.models import model_to_dict
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 def map(request):
@@ -26,7 +26,13 @@ def sightings(request):
     return render(request, 'squirrel/sightings.html', context)
 
 
+@csrf_exempt
 def squirrel(request, unique_squirrel_id):
+    """
+    :param request:
+    :param unique_squirrel_id:
+    :return:
+    """
     method = request.method
     squirrel = Squirrel.objects.filter(unique_squirrel_id=unique_squirrel_id).first()
     if not squirrel:
@@ -34,9 +40,27 @@ def squirrel(request, unique_squirrel_id):
 
     if method == 'GET':
         squirrel_dict = model_to_dict(squirrel)
+        return JsonResponse(squirrel_dict)
+
     else:
-        pass
-    return JsonResponse(squirrel_dict)
+        x = request.POST.get('x')
+        y = request.POST.get('y')
+        unique_squirrel_id = request.POST.get('unique_squirrel_id')
+        shift = request.POST.get('shift')
+        date = request.POST.get('date')
+        age = request.POST.get('age')
+
+        squirrel.x = x
+        squirrel.y = y
+        squirrel.unique_squirrel_id = unique_squirrel_id
+        squirrel.shift = shift
+        squirrel.date = date
+        squirrel.age = age
+        squirrel.save()
+        res = {
+            'status': 'success',
+        }
+        return JsonResponse(res)
 
 
 def input_data(request):
@@ -45,7 +69,7 @@ def input_data(request):
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, elements in enumerate(lines):
-            if 1<=index <= 50:
+            if 1 <= index <= 50:
                 sq_info = elements.split(",")
                 create_dict = {
                     "x": sq_info[0],
