@@ -4,6 +4,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView
+
 from squirrel.squirrel_operation import SquirrelOperation
 
 squirrel_operation = SquirrelOperation()
@@ -17,12 +19,18 @@ def map(request):
     return render(request, 'squirrel/map.html', context)
 
 
-def sightings(request):
-    sightings = Squirrel.objects.all()
-    context = {
-        'sightings': sightings
-    }
-    return render(request, 'squirrel/sightings.html', context)
+class IndexView(ListView):
+    model = Squirrel
+    template_name = 'squirrel/sightings.html'
+    context_object_name = 'sightings'
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_page = context['page_obj'].number
+        context['start'] = (current_page - 1) * 10
+        # print('context:',context)
+        return context
 
 
 @csrf_exempt
