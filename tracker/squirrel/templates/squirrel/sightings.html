@@ -34,6 +34,11 @@
         }
       }
 
+
+
+
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
@@ -49,7 +54,10 @@
         <div class="inner">
             <h3 class="masthead-brand">Sightings</h3>
             <nav class="nav nav-masthead justify-content-center">
-                <button type="button" class="btn btn-primary">add Sighting</button>
+                <!--                <buttontton type="button" class="btn btn-primary">add Sighting</buttontton>-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                    add Sighting
+                </button>
                 <!--                <a class="nav-link active">add Sighting</a>-->
                 <!--                <a class="nav-link" href="https://v4.bootcss.com/docs/examples/cover/#">Features</a>-->
                 <!--                <a class="nav-link" href="https://v4.bootcss.com/docs/examples/cover/#">Contact</a>-->
@@ -94,6 +102,7 @@
 
     </footer>
 
+    <!--    edit model-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -124,7 +133,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Unique Squirrel ID</span>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="uniqueSquirrelID">
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="uniqueSquirrelID">
                     </div>
 
                     <div class="input-group input-group-sm mb-3">
@@ -155,6 +165,193 @@
             </div>
         </div>
     </div>
+
+    <!--create model-->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel" style="color:black;">添加</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--输入框-->
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Latitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="latitudeCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Longitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="longitudeCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Unique Squirrel ID</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="uniqueSquirrelIDCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Shift</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="shiftCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Date</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="dateCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Age</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="ageCreate">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Primary Fur Color</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="primaryFurColor">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Location</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="location">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Specific Location</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="specificLocation">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Running</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="running">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Chasing</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="chasing">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Climbing</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="climbing">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Eating</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="eating">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Foraging</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="foraging">
+                    </div>
+
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Other Activities</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="otherActivities">
+                    </div>
+
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Kuks</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="kuks">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Moans</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="moans">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tail flags</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="tailFlags">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tail twitches</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="tailTwitches">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Approaches</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="approaches">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Indifferent</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="indifferent">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Runs from</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="runsFrom">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeCreate">Close</button>
+                    <button type="button" class="btn btn-primary" id="create">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -181,8 +378,8 @@ var getInfoFromBackend = function(id) {
      })
 }
 
-var addOrUpdateInfo = function(id) {
-    var path = "/sightings/"+id;
+var UpdateInfo = function(id) {
+    var path = "/sightings/"+id
     var params = getInfoFromPage()
 
     $.ajax({
@@ -193,6 +390,24 @@ var addOrUpdateInfo = function(id) {
         success: function (data) {
             if(data.status == 'success'){
                 $('#close').click()
+                location.reload()
+            }
+        }
+    });
+}
+
+var createInfo = function() {
+    var path = "/sightings/add"
+    var params = getCreateInfoFromPage()
+
+    $.ajax({
+        url: path,
+        data: params,
+        dataType: "json", // 服务器响应的数据类型
+        type: "POST", // 请求方式
+        success: function (data) {
+            if(data.status == 'success'){
+                $('#closeCreate').click()
                 location.reload()
             }
         }
@@ -219,6 +434,34 @@ var getInfoFromPage = function(info) {
     }
     return info
 }
+
+var getCreateInfoFromPage = function(info) {
+    var info = {
+        x: $('#latitudeCreate').val(),
+        y: $('#longitudeCreate').val(),
+        unique_squirrel_id: $('#uniqueSquirrelIDCreate').val(),
+        shift: $('#shiftCreate').val(),
+        date: $('#dateCreate').val(),
+        age: $('#ageCreate').val(),
+        primary_fur_color :$('primaryFurColor').val(),
+        location :$('location').val(),
+        specific_location :$('specificLocation').val(),
+        running :$('running').val(),
+        chasing :$('chasing').val(),
+        climbing :$('climbing').val(),
+        eating :$('eating').val(),
+        foraging :$('foraging').val(),
+        other_activities :$('otherActivities').val(),
+        kuks :$('kuks').val(),
+        moans :$('moans').val(),
+        tail_flags :$('tailFlags').val(),
+        tail_twitches :$('tailTwitches').val(),
+        approaches :$('approaches').val(),
+        indifferent :$('indifferent').val(),
+        runs_from :$('runsFrom').val(),
+    }
+    return info
+}
 $(document).on("click",".edit",function(){
     var id = $(this).data("key")
     getInfoFromBackend(id)
@@ -226,8 +469,15 @@ $(document).on("click",".edit",function(){
 
 $(document).on("click","#save",function(){
     var id = $('#uniqueSquirrelID').val()
-    addOrUpdateInfo(id)
+    UpdateInfo(id)
 });
+
+$(document).on("click","#create",function(){
+    createInfo()
+});
+
+
+
 
 
 </script>

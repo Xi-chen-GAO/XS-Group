@@ -63,6 +63,61 @@ def squirrel(request, unique_squirrel_id):
         return JsonResponse(res)
 
 
+@csrf_exempt
+def squirrel_add(request):
+    x = request.POST.get('x')
+    y = request.POST.get('y')
+    unique_squirrel_id = request.POST.get('unique_squirrel_id')
+    shift = request.POST.get('shift')
+    date = request.POST.get('date')
+    age = request.POST.get('age')
+    primary_fur_color = request.POST.get('primary_fur_color')
+    location = request.POST.get('location')
+    specific_location = request.POST.get('specific_location')
+    running = request.POST.get('running')
+    chasing = request.POST.get('chasing')
+    climbing = request.POST.get('climbing')
+    eating = request.POST.get('eating')
+    foraging = request.POST.get('foraging')
+    other_activities = request.POST.get('other_activities')
+    kuks = request.POST.get('kuks')
+    moans = request.POST.get('moans')
+    tail_flags = request.POST.get('tail_flags')
+    tail_twitches = request.POST.get('tail_twitches')
+    approaches = request.POST.get('approaches')
+    indifferent = request.POST.get('indifferent')
+    runs_from = request.POST.get('runs_from')
+
+    squirrel = Squirrel()
+    squirrel.x = x
+    squirrel.y = y
+    squirrel.unique_squirrel_id = unique_squirrel_id
+    squirrel.shift = shift
+    squirrel.date = date
+    squirrel.age = age
+    squirrel.primary_fur_color = primary_fur_color
+    squirrel.location = location
+    squirrel.specific_location = specific_location
+    squirrel.running = running
+    squirrel.chasing = chasing
+    squirrel.climbing = climbing
+    squirrel.eating = eating
+    squirrel.foraging = foraging
+    squirrel.other_activities = other_activities
+    squirrel.kuks = kuks
+    squirrel.moans = moans
+    squirrel.tail_flags = tail_flags
+    squirrel.tail_twitches = tail_twitches
+    squirrel.approaches = approaches
+    squirrel.indifferent = indifferent
+    squirrel.runs_from = runs_from
+    squirrel.save()
+    res = {
+        'status': 'success',
+    }
+    return JsonResponse(res)
+
+
 def input_data(request):
     base_path = os.getcwd()
     path = os.path.join(base_path, 'data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
