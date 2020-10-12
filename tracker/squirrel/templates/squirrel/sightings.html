@@ -34,11 +34,6 @@
         }
       }
 
-
-
-
-
-
     </style>
     <!-- Custom styles for this template -->
     <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
@@ -55,7 +50,7 @@
             <h3 class="masthead-brand">Sightings</h3>
             <nav class="nav nav-masthead justify-content-center">
                 <!--                <buttontton type="button" class="btn btn-primary">add Sighting</buttontton>-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" id="addSighting">
                     add Sighting
                 </button>
                 <!--                <a class="nav-link active">add Sighting</a>-->
@@ -462,6 +457,32 @@ var getCreateInfoFromPage = function(info) {
     }
     return info
 }
+
+var clearCreateInfo = function(info) {
+    $('#latitudeCreate').val('')
+    $('#longitudeCreate').val('')
+    $('#uniqueSquirrelIDCreate').val('')
+    $('#shiftCreate').val('')
+    $('#dateCreate').val('')
+    $('#ageCreate').val('')
+    $('primaryFurColor').val('')
+    $('location').val('')
+    $('specificLocation').val('')
+    $('running').val('')
+    $('chasing').val('')
+    $('climbing').val('')
+    $('eating').val('')
+    $('foraging').val('')
+    $('otherActivities').val('')
+    $('kuks').val('')
+    $('moans').val('')
+    $('tailFlags').val('')
+    $('tailTwitches').val('')
+    $('approaches').val('')
+    $('indifferent').val('')
+    $('runsFrom').val('')
+}
+
 $(document).on("click",".edit",function(){
     var id = $(this).data("key")
     getInfoFromBackend(id)
@@ -472,7 +493,12 @@ $(document).on("click","#save",function(){
     UpdateInfo(id)
 });
 
+$(document).on("click","#addSighting",function(){
+    clearCreateInfo()
+});
+
 $(document).on("click","#create",function(){
+    clearCreateInfo()
     createInfo()
 });
 
