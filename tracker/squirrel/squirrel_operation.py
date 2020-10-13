@@ -22,20 +22,87 @@ class SquirrelOperation:
         else:
             return False
 
+    def _is_age_legal(self, age):
+        if age and age != "":
+            return True
+        else:
+            return False
+
+    def _is_location_legal(self, location):
+        if location and location != "":
+            return True
+        else:
+            return False
+
     def get_all_squirrel(self):
         sqs = Squirrel.objects.all()
         return sqs
 
     def get_squirrel_color_by_day(self, squirrels):
         stats_info = {}
+        all_date = []
+        all_color = []
         for s in squirrels:
             date = s.date
             primary_fur_color = s.primary_fur_color
             if self._is_date_legal(date) and self._is_color_legal(primary_fur_color):
+                all_date.append(date)
+                all_color.append(primary_fur_color)
                 stats_info.setdefault(date, {})
                 stats_info[date].setdefault(primary_fur_color, 0)
                 stats_info[date][primary_fur_color] += 1
-        return stats_info
+        all_date = sorted(list(set(all_date)))
+        all_color = set(all_color)
+
+        color_info_list = []
+        for color in all_color:
+            color_datas = []
+            for date in all_date:
+                data = stats_info[date].get(color, 0)
+                color_datas.append(data)
+            color_info = {
+                'name': color,
+                'type': 'bar',
+                'barGap': 0,
+                'data': color_datas,
+            }
+            color_info_list.append(color_info)
+
+        return color_info_list, all_date
+
+    def get_squirrel_age_by_location(self, squirrels):
+        stats_info = {}
+        all_age = []
+        all_location = []
+        for s in squirrels:
+            age = s.age
+            location = s.location
+            if self._is_age_legal(age) and self._is_location_legal(location):
+                all_age.append(age)
+                all_location.append(location)
+                stats_info.setdefault(location, {})
+                stats_info[location].setdefault(age, 0)
+                stats_info[location][age] += 1
+        print(stats_info)
+        # all_location = list(set(location))
+        # all_age = set(all_age)
+        #
+        # color_info_list = []
+        # for location in all_location:
+        #     color_datas = []
+        #     for date in all_date:
+        #         data = stats_info[date].get(color, 0)
+        #         color_datas.append(data)
+        #     color_info = {
+        #         'name': color,
+        #         'type': 'bar',
+        #         'barGap': 0,
+        #         'label': 'labelOption',
+        #         'data': color_datas,
+        #     }
+        #     color_info_list.append(color_info)
+
+        # return color_info_list, all_date
 
     def get_info(self, unique_id):
         squirrel = self._get_squirrel_by_unique_id(unique_id)

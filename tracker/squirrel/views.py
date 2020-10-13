@@ -11,6 +11,14 @@ from squirrel.squirrel_operation import SquirrelOperation
 squirrel_operation = SquirrelOperation()
 
 
+def index(request):
+    sightings = Squirrel.objects.all()
+    context = {
+        'sightings': sightings
+    }
+    return render(request, 'squirrel/index.html', context)
+
+
 def map(request):
     sightings = Squirrel.objects.all()
     context = {
@@ -63,8 +71,13 @@ def stats(request):
     :return:
     """
     squirrels = squirrel_operation.get_all_squirrel()
-    squirrel_color_by_day = squirrel_operation.get_squirrel_color_by_day(squirrels)
-    return JsonResponse(squirrel_color_by_day)
+    color_info_list, all_date = squirrel_operation.get_squirrel_color_by_day(squirrels)
+    squirrel_operation.get_squirrel_age_by_location(squirrels)
+    state_info = {
+        'color_info_list':color_info_list,
+        'all_date': all_date,
+    }
+    return JsonResponse(state_info)
 
 
 @csrf_exempt
@@ -106,8 +119,9 @@ def input_data(request):
     path = os.path.join(base_path, 'data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
     with open(path, 'r') as f:
         lines = f.readlines()
+        lines.pop(0)
         for index, elements in enumerate(lines):
-            if 1 <= index <= 50:
+            if 1:
                 sq_info = elements.split(",")
                 create_dict = {
                     "x": sq_info[0],
