@@ -55,6 +55,18 @@ def squirrel(request, unique_squirrel_id):
         return JsonResponse(res)
 
 
+def stats(request):
+    """
+    统计数据
+    1.按天数统计红松鼠和灰松鼠
+    :param request:
+    :return:
+    """
+    squirrels = squirrel_operation.get_all_squirrel()
+    squirrel_color_by_day = squirrel_operation.get_squirrel_color_by_day(squirrels)
+    return JsonResponse(squirrel_color_by_day)
+
+
 @csrf_exempt
 def squirrel_add(request):
     x = request.POST.get('x')

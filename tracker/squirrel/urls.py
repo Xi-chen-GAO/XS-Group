@@ -7,6 +7,7 @@ urlpatterns = [
     # path('sightings', views.sightings, name='sightings'),
     path('sightings', views.IndexView.as_view(), name='sightings'),
     path('sightings/add', views.squirrel_add, name='squirrel_add'),
+    path('sightings/stats', views.stats, name='stats'),
     path('sightings/<unique_squirrel_id>', views.squirrel, name='squirrel'),
     path('input_data', views.input_data, name='input_data'),
 ]
