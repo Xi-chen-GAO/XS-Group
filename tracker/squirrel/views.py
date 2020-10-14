@@ -1,5 +1,6 @@
 # Create your views here.
 import os
+import csv
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
@@ -75,8 +76,6 @@ def stats(request):
     squirrel_operation.get_squirrel_age_by_location(squirrels)
 
     age_info_list, all_location = squirrel_operation.get_squirrel_age_by_location(squirrels)
-    print('age_info_list:',age_info_list)
-    print('all_location:',all_location)
     state_info = {
         'color_info_list':color_info_list,
         'all_date': all_date,
@@ -124,7 +123,6 @@ def input_data(request):
     base_path = os.getcwd()
     path = os.path.join(base_path, 'data/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
 
-    import csv
     csv_reader = csv.reader(open(path))
     for index,row in enumerate(csv_reader):
         if index!=0:
