@@ -83,7 +83,25 @@ class SquirrelOperation:
                 stats_info.setdefault(location, {})
                 stats_info[location].setdefault(age, 0)
                 stats_info[location][age] += 1
-        print(stats_info)
+
+        all_age = set(all_age)
+        all_location = list(set(all_location))
+        age_info_list = []
+        for age in all_age:
+            age_info = {
+                'name': age,
+                'type': 'bar',
+                'stack': '总量',
+                'label': {
+                    'show': True,
+                    'position': 'insideRight'
+                },
+                'data': []
+            }
+            for location in all_location:
+                data = stats_info[location].get(age, 0)
+                age_info['data'].append(data)
+            age_info_list.append(age_info)
         # all_location = list(set(location))
         # all_age = set(all_age)
         #
@@ -102,7 +120,7 @@ class SquirrelOperation:
         #     }
         #     color_info_list.append(color_info)
 
-        # return color_info_list, all_date
+        return age_info_list, all_location
 
     def get_info(self, unique_id):
         squirrel = self._get_squirrel_by_unique_id(unique_id)

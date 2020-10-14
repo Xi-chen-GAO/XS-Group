@@ -73,9 +73,15 @@ def stats(request):
     squirrels = squirrel_operation.get_all_squirrel()
     color_info_list, all_date = squirrel_operation.get_squirrel_color_by_day(squirrels)
     squirrel_operation.get_squirrel_age_by_location(squirrels)
+
+    age_info_list, all_location = squirrel_operation.get_squirrel_age_by_location(squirrels)
+    print('age_info_list:',age_info_list)
+    print('all_location:',all_location)
     state_info = {
         'color_info_list':color_info_list,
         'all_date': all_date,
+        'age_info_list': age_info_list,
+        'all_location': all_location,
     }
     return JsonResponse(state_info)
 

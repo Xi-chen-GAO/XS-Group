@@ -35,6 +35,7 @@
       }
 
 
+
     </style>
     <!-- Custom styles for this template -->
     <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
@@ -71,6 +72,7 @@
 
     <footer class="mastfoot mt-auto">
         <div id="main" style="width: 1000px;height:400px;left:"></div>
+        <div id="main2" style="width: 1000px;height:400px;left:"></div>
     </footer>
 </div>
 
@@ -179,9 +181,7 @@ var draw = function(all_date,color_info_list) {
                 type: 'shadow'
             }
         },
-        legend: {
-            data: ['Forest', 'Steppe', 'Desert', 'Wetland']
-        },
+
         toolbox: {
             show: true,
             orient: 'vertical',
@@ -237,12 +237,53 @@ var getInfo = function() {
             all_date = result.all_date
 
             draw(all_date,color_info_list)
+
+            age_info_list = result.age_info_list
+            all_location = result.all_location
+
+            draw2(all_location,age_info_list)
         }
      })
 }
+
+var draw2 = function(all_location,age_info_list) {
+    var app2 = echarts.init(document.getElementById('main2'));
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    color: "#fff",
+                }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: all_location,
+            axisLine: {
+                lineStyle: {
+                    color: "#fff",
+                }
+            }
+        },
+        series: age_info_list,
+    }
+    app2.setOption(option);
+}
 getInfo()
-
-
 
 </script>
 </html>
