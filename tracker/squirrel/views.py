@@ -21,7 +21,8 @@ def index(request):
 
 
 def map(request):
-    sightings = Squirrel.objects.all()
+    # limit return
+    sightings = Squirrel.objects.all()[:50]
     context = {
         'sightings': sightings
     }
