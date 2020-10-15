@@ -51,7 +51,7 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">Sightings</h3>
+<!--            <h3 class="masthead-brand">Sightings</h3>-->
             <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="/sightings">sightings</a>
@@ -60,9 +60,10 @@
         </div>
     </header>
 
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">首页</h1>
-        <p class="lead">some thing to say</p>
+    <img role="main" class="inner cover">
+        <h1 class="cover-heading">CENTRAL PARK SQUIRREL TRAKER</h1>
+        <img src="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/QWYGKDD3LII6VIYRVWYTIRYZVE.jpg&w=767"></img>
+<!--        <p class="lead">some thing to say</p>-->
     </main>
 
     <footer class="mastfoot mt-auto">
@@ -73,212 +74,4 @@
 
 
 </body>
-<div style="all: initial;">
-    <div></div>
-</div>
-<script>
-
-var draw = function(all_date,color_info_list) {
-    for(j = 0; j < color_info_list.length; j++) {
-       color_info_list[j].label = labelOption
-    }
-
-    var app = echarts.init(document.getElementById('main'));
-    var posList = [
-        'left', 'right', 'top', 'bottom',
-        'inside',
-        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-    ];
-    app.configParameters = {
-        rotate: {
-            min: -90,
-            max: 90
-        },
-        align: {
-            options: {
-                left: 'left',
-                center: 'center',
-                right: 'right'
-            }
-        },
-        verticalAlign: {
-            options: {
-                top: 'top',
-                middle: 'middle',
-                bottom: 'bottom'
-            }
-        },
-        position: {
-            options: echarts.util.reduce(posList, function (map, pos) {
-                map[pos] = pos;
-                return map;
-            }, {})
-        },
-        distance: {
-            min: 0,
-            max: 100
-        }
-    };
-
-    app.config = {
-        rotate: 90,
-        align: 'left',
-        verticalAlign: 'middle',
-        position: 'insideBottom',
-        distance: 15,
-        onChange: function () {
-            var labelOption = {
-                normal: {
-                    rotate: app.config.rotate,
-                    align: app.config.align,
-                    verticalAlign: app.config.verticalAlign,
-                    position: app.config.position,
-                    distance: app.config.distance
-                }
-            };
-            myChart.setOption({
-                series: [{
-                    label: labelOption
-                }, {
-                    label: labelOption
-                }, {
-                    label: labelOption
-                }, {
-                    label: labelOption
-                }]
-            });
-        }
-    };
-
-
-    var labelOption = {
-        show: true,
-        position: app.config.position,
-        distance: app.config.distance,
-        align: app.config.align,
-        verticalAlign: app.config.verticalAlign,
-        rotate: app.config.rotate,
-        formatter: '{c}  {name|{a}}',
-        fontSize: 16,
-        rich: {
-            name: {
-                textBorderColor: '#fff'
-            }
-        }
-    };
-
-    option = {
-        color: ['#003366', '#006699', '#4cabce', '#e5323e'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                mark: {show: true},
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        xAxis: [
-            {
-                type: 'category',
-                axisTick: {show: false},
-                data: all_date,
-                axisLine: {
-                    lineStyle: {
-                        color: "#fff",
-                    }
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                max : 500,
-                axisLine: {
-                    lineStyle: {
-                        color: "#fff",
-                    }
-                }
-            }
-        ],
-        series: color_info_list
-    };
-    app.setOption(option);
-
-}
-
-
-var getInfo = function() {
-    var path = "/sightings/stats"
-
-    $.ajax({
-        url: path,
-        type: 'get',
-        success:function(result){
-
-            color_info_list = result.color_info_list
-            all_date = result.all_date
-
-            draw(all_date,color_info_list)
-
-            age_info_list = result.age_info_list
-            all_location = result.all_location
-
-            draw2(all_location,age_info_list)
-        }
-     })
-}
-
-var draw2 = function(all_location,age_info_list) {
-    var app2 = echarts.init(document.getElementById('main2'));
-    option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value',
-            axisLine: {
-                lineStyle: {
-                    color: "#fff",
-                }
-            }
-        },
-        yAxis: {
-            type: 'category',
-            data: all_location,
-            axisLine: {
-                lineStyle: {
-                    color: "#fff",
-                }
-            }
-        },
-        series: age_info_list,
-    }
-    app2.setOption(option);
-}
-getInfo()
-
-</script>
 </html>

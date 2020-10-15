@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Sightings</title>
+
+    <link rel="canonical" href="https://v4.bootcss.com/docs/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <script src="https://lib.baomitu.com/echarts/4.7.0/echarts-en.common.js"></script>
+
+</head>
+<body class="text-center" cz-shortcut-listen="true">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="/">Home</a>
+                <a class="nav-link" href="/sightings">sightings</a>
+                <a class="nav-link" href="/map">map</a>
+            </nav>
+        </div>
+    </header>
+
+    <img role="main" class="inner cover">
+        <h1 class="cover-heading">CENTRAL PARK SQUIRREL TRAKER</h1>
+    </main>
+
+    <footer class="mastfoot mt-auto">
+        <div id="main" style="width: 1000px;height:400px;left:-50px"></div>
+        <div id="main2" style="width: 1000px;height:400px;left:-65px"></div>
+    </footer>
+</div>
+
+
+</body>
+<div style="all: initial;">
+    <div></div>
+</div>
+<script>
+
+var draw = function(all_date,color_info_list) {
+    for(j = 0; j < color_info_list.length; j++) {
+       color_info_list[j].label = labelOption
+    }
+
+    var app = echarts.init(document.getElementById('main'));
+    var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+    ];
+    app.configParameters = {
+        rotate: {
+            min: -90,
+            max: 90
+        },
+        align: {
+            options: {
+                left: 'left',
+                center: 'center',
+                right: 'right'
+            }
+        },
+        verticalAlign: {
+            options: {
+                top: 'top',
+                middle: 'middle',
+                bottom: 'bottom'
+            }
+        },
+        position: {
+            options: echarts.util.reduce(posList, function (map, pos) {
+                map[pos] = pos;
+                return map;
+            }, {})
+        },
+        distance: {
+            min: 0,
+            max: 100
+        }
+    };
+
+    app.config = {
+        rotate: 90,
+        align: 'left',
+        verticalAlign: 'middle',
+        position: 'insideBottom',
+        distance: 15,
+        onChange: function () {
+            var labelOption = {
+                normal: {
+                    rotate: app.config.rotate,
+                    align: app.config.align,
+                    verticalAlign: app.config.verticalAlign,
+                    position: app.config.position,
+                    distance: app.config.distance
+                }
+            };
+            myChart.setOption({
+                series: [{
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }, {
+                    label: labelOption
+                }]
+            });
+        }
+    };
+
+
+    var labelOption = {
+        show: true,
+        position: app.config.position,
+        distance: app.config.distance,
+        align: app.config.align,
+        verticalAlign: app.config.verticalAlign,
+        rotate: app.config.rotate,
+        formatter: '{c}  {name|{a}}',
+        fontSize: 16,
+        rich: {
+            name: {
+                textBorderColor: '#fff'
+            }
+        }
+    };
+
+    option = {
+        color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: all_date,
+                axisLine: {
+                    lineStyle: {
+                        color: "#fff",
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                max : 500,
+                axisLine: {
+                    lineStyle: {
+                        color: "#fff",
+                    }
+                }
+            }
+        ],
+        series: color_info_list
+    };
+    app.setOption(option);
+
+}
+
+
+var getInfo = function() {
+    color_info_list = {{ color_info_list|safe }}
+    all_date = {{all_date|safe}}
+
+    draw(all_date,color_info_list)
+
+    age_info_list = {{age_info_list|safe}}
+    all_location = {{all_location|safe}}
+
+    draw2(all_location,age_info_list)
+}
+
+var draw2 = function(all_location,age_info_list) {
+    for(j = 0; j < age_info_list.length; j++) {
+       age_info_list[j].label.show = true
+    }
+    var app2 = echarts.init(document.getElementById('main2'));
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    color: "#fff",
+                }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: all_location,
+            axisLine: {
+                lineStyle: {
+                    color: "#fff",
+                }
+            }
+        },
+        series: age_info_list,
+    }
+    app2.setOption(option);
+}
+getInfo()
+
+</script>
+</html>

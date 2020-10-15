@@ -76,7 +76,8 @@ def stats(request):
         'age_info_list': age_info_list,
         'all_location': all_location,
     }
-    return JsonResponse(state_info)
+    # return JsonResponse(state_info)
+    return render(request, 'squirrel/statistics.html', state_info)
 
 
 @csrf_exempt

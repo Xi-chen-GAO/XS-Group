@@ -93,7 +93,7 @@ class SquirrelOperation:
                 'type': 'bar',
                 'stack': '总量',
                 'label': {
-                    'show': True,
+                    'show': 'true',
                     'position': 'insideRight'
                 },
                 'data': []
