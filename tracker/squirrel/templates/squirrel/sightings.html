@@ -87,6 +87,10 @@
                             data-key="{{ sighting.unique_squirrel_id }}">
                         edit
                     </button>
+                    <button type="button" class="btn btn-primary view" data-toggle="modal" data-target="#viewModal"
+                            data-key="{{ sighting.unique_squirrel_id }}">
+                        view
+                    </button>
                 </td>
             </tr>
 
@@ -103,7 +107,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:black;">松鼠详情</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:black;">Squirrel Sightings</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -160,6 +164,69 @@
             </div>
         </div>
     </div>
+
+    <!--    view model-->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalLabel" style="color:black;">Squirrel Sightings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--输入框-->
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Latitude</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="latitudeView">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Longitude</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="longitudeView">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Unique Squirrel ID</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                           id="uniqueSquirrelIDView">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Shift</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="shiftView">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Date</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="dateView">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Age</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="ageView">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeView">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!--create model-->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -389,6 +456,16 @@ var getInfoFromBackend = function(id) {
         }
      })
 }
+var getInfoFromBackend = function(id) {
+    var path = "/sightings/"+id;
+    $.ajax({
+        url: path,
+        type: 'get',
+        success:function(result){
+            setViewInfo(result)
+        }
+     })
+}
 
 var UpdateInfo = function(id) {
     var path = "/sightings/"+id
@@ -435,6 +512,14 @@ var setInfo = function(info) {
     $('#age').val(info.age);
 }
 
+var setViewInfo = function(info) {
+    $('#latitudeView').val(info.x);
+    $('#longitudeView').val(info.y);
+    $('#uniqueSquirrelIDView').val(info.unique_squirrel_id);
+    $('#shiftView').val(info.shift);
+    $('#dateView').val(info.date);
+    $('#ageView').val(info.age);
+}
 var getInfoFromPage = function(info) {
     var info = {
         x: $('#latitude').val(),
@@ -501,6 +586,11 @@ var clearCreateInfo = function(info) {
 }
 
 $(document).on("click",".edit",function(){
+    var id = $(this).data("key")
+    getInfoFromBackend(id)
+});
+
+$(document).on("click",".view",function(){
     var id = $(this).data("key")
     getInfoFromBackend(id)
 });
