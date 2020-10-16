@@ -456,7 +456,7 @@ var getInfoFromBackend = function(id) {
         }
      })
 }
-var getInfoFromBackend = function(id) {
+var getViewInfoFromBackend = function(id) {
     var path = "/sightings/"+id;
     $.ajax({
         url: path,
@@ -592,7 +592,7 @@ $(document).on("click",".edit",function(){
 
 $(document).on("click",".view",function(){
     var id = $(this).data("key")
-    getInfoFromBackend(id)
+    getViewInfoFromBackend(id)
 });
 
 $(document).on("click","#save",function(){
