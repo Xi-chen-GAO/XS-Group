@@ -167,6 +167,14 @@ var draw = function(all_date,color_info_list) {
     };
 
     option = {
+        title: {
+            text: 'Squirrel sighting trend in October',
+            x:'center',
+            y: 'bottom',
+            textStyle: {
+                color: '#fff'
+            }
+        },
         color: ['#003366', '#006699', '#4cabce', '#e5323e'],
         tooltip: {
             trigger: 'axis',
@@ -190,6 +198,7 @@ var draw = function(all_date,color_info_list) {
         },
         xAxis: [
             {
+                name:'Date',
                 type: 'category',
                 axisTick: {show: false},
                 data: all_date,
@@ -202,6 +211,7 @@ var draw = function(all_date,color_info_list) {
         ],
         yAxis: [
             {
+                name:'Number of Squirrel',
                 type: 'value',
                 max : 500,
                 axisLine: {
@@ -236,6 +246,15 @@ var draw2 = function(all_location,age_info_list) {
     }
     var app2 = echarts.init(document.getElementById('main2'));
     option = {
+        title: {
+            text: 'Age distribution in different locations',
+            x:'center',
+            y: 'bottom',
+            padding:10,
+            textStyle: {
+                color: '#fff'
+            }
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -245,11 +264,12 @@ var draw2 = function(all_location,age_info_list) {
 
         grid: {
             left: '3%',
-            right: '4%',
-            bottom: '3%',
+            right: '15%',
+            bottom: '10%',
             containLabel: true
         },
         xAxis: {
+            name:'Number of Squirrel',
             type: 'value',
             axisLine: {
                 lineStyle: {
@@ -258,6 +278,7 @@ var draw2 = function(all_location,age_info_list) {
             }
         },
         yAxis: {
+            name:'Location',
             type: 'category',
             data: all_location,
             axisLine: {
