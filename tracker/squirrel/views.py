@@ -56,11 +56,15 @@ def squirrel(request, unique_squirrel_id):
         shift = request.POST.get('shift')
         date = request.POST.get('date')
         age = request.POST.get('age')
-
-        squirrel_operation.update(x, y, unique_squirrel_id, shift, date, age)
-        res = {
-            'status': 'success',
-        }
+        try:
+            squirrel_operation.update(x, y, unique_squirrel_id, shift, date, age)
+            res = {
+                'status': 'success',
+            }
+        except Exception as e:
+            res = {
+                'status': 'failed',
+            }
         return JsonResponse(res)
 
 
@@ -105,10 +109,15 @@ def squirrel_add(request):
     indifferent = request.POST.get('indifferent')
     runs_from = request.POST.get('runs_from')
 
-    squirrel_operation.create(x, y, unique_squirrel_id, shift, date, age, primary_fur_color, location,
-                              specific_location, running, chasing, climbing, eating, foraging, other_activities, kuks,
-                              moans, tail_flags, tail_twitches, approaches, indifferent, runs_from)
-    res = {
-        'status': 'success',
-    }
+    try:
+        squirrel_operation.create(x, y, unique_squirrel_id, shift, date, age, primary_fur_color, location,
+                                  specific_location, running, chasing, climbing, eating, foraging, other_activities, kuks,
+                                  moans, tail_flags, tail_twitches, approaches, indifferent, runs_from)
+        res = {
+            'status': 'success',
+        }
+    except Exception as e:
+        res = {
+            'status': 'failed',
+        }
     return JsonResponse(res)

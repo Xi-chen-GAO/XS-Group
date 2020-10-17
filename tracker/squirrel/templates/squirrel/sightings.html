@@ -34,6 +34,9 @@
         }
       }
 
+
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="https://v4.bootcss.com/docs/examples/cover/cover.css" rel="stylesheet">
@@ -59,12 +62,12 @@
 
     <main role="main" class="inner cover">
         <h1 class="cover-heading">All Sightings</h1>
-        <p class="lead">some thing to say</p>
     </main>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" id="addSighting">
-        add Sighting
-    </button>
+
     <footer class="mastfoot mt-auto">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" style="margin-left: 32rem;" id="addSighting">
+        add Sighting
+        </button>
         <table class="table table-dark">
             <thead>
             <tr>
@@ -78,7 +81,7 @@
             <tbody>
             {% for sighting in sightings %}
             <tr>
-<!--                <th scope="row">{{forloop.counter}}</th>-->
+                <!--                <th scope="row">{{forloop.counter}}</th>-->
                 <th scope="row">{{start|add:forloop.counter}}</th>
                 <td>{{ sighting.unique_squirrel_id }}</td>
                 <td>{{ sighting.date }}</td>
@@ -136,13 +139,15 @@
                                id="uniqueSquirrelID">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Shift</span>
+                            <label class="input-group-text" for="shift">Shift</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="shift">
+                        <select class="custom-select" id="shift">
+                            <option value="PM">PM</option>
+                            <option value="AM">AM</option>
+                        </select>
                     </div>
-
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Date</span>
@@ -150,12 +155,17 @@
                         <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="date">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Age</span>
+                            <label class="input-group-text" for="age">Age</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="age">
+                        <select class="custom-select" id="age">
+                            <option value="Adult">ADULT</option>
+                            <option value="Juvenile">JUVENILE</option>
+                            <option value="?">?</option>
+                        </select>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
@@ -167,66 +177,68 @@
 
     <!--    view model-->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewModalLabel" style="color:black;">Squirrel Sightings</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!--输入框-->
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Latitude</span>
-                    </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="latitudeView">
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewModalLabel" style="color:black;">Squirrel Sightings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <!--输入框-->
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Latitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="latitudeView">
+                    </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Longitude</span>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Longitude</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="longitudeView">
                     </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="longitudeView">
-                </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Unique Squirrel ID</span>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Unique Squirrel ID</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+                               id="uniqueSquirrelIDView">
                     </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
-                           id="uniqueSquirrelIDView">
-                </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Shift</span>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Shift</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="shiftView">
                     </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="shiftView">
-                </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Date</span>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Date</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="dateView">
                     </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="dateView">
-                </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Age</span>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Age</span>
+                        </div>
+                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="ageView">
                     </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="ageView">
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeView">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeView">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!--create model-->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -265,14 +277,16 @@
                                id="uniqueSquirrelIDCreate">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Shift</span>
-                        </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
-                               id="shiftCreate">
-                    </div>
 
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="shiftCreate">Shift</label>
+                        </div>
+                        <select class="custom-select" id="shiftCreate">
+                            <option value="PM">PM</option>
+                            <option value="AM">AM</option>
+                        </select>
+                    </div>
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Date</span>
@@ -280,13 +294,16 @@
                         <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="dateCreate">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Age</span>
+                            <label class="input-group-text" for="ageCreate">Age</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="ageCreate">
+                        <select class="custom-select" id="ageCreate">
+                            <option value="Adult">ADULT</option>
+                            <option value="Juvenile">JUVENILE</option>
+                            <option value="?">?</option>
+                        </select>
                     </div>
-
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Primary Fur Color</span>
@@ -295,13 +312,15 @@
                                id="primaryFurColor">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Location</span>
+                            <label class="input-group-text" for="location">Location</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="location">
+                        <select class="custom-select" id="location">
+                            <option value="Ground Plane">GROUND PLANE</option>
+                            <option value="Above Ground">ABOVE GROUND</option>
+                        </select>
                     </div>
-
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Specific Location</span>
@@ -310,41 +329,54 @@
                                id="specificLocation">
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Running</span>
+                            <label class="input-group-text" for="running">running</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="running">
+                        <select class="custom-select" id="running">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="chasing">Chasing</label>
+                        </div>
+                        <select class="custom-select" id="chasing">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Chasing</span>
+                            <label class="input-group-text" for="climbing">Climbing</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="chasing">
+                        <select class="custom-select" id="climbing">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Climbing</span>
+                            <label class="input-group-text" for="eating">Eating</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="climbing">
+                        <select class="custom-select" id="eating">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Eating</span>
+                            <label class="input-group-text" for="foraging">Foraging</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="eating">
+                        <select class="custom-select" id="foraging">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
-
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Foraging</span>
-                        </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="foraging">
-                    </div>
-
 
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
@@ -354,58 +386,75 @@
                                id="otherActivities">
                     </div>
 
-
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Kuks</span>
+                            <label class="input-group-text" for="kuks">Kuks</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="kuks">
+                        <select class="custom-select" id="kuks">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Moans</span>
+                            <label class="input-group-text" for="moans">Moans</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="moans">
+                        <select class="custom-select" id="moans">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Tail flags</span>
+                            <label class="input-group-text" for="tailFlags">Tail flags</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="tailFlags">
+                        <select class="custom-select" id="tailFlags">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Tail twitches</span>
+                            <label class="input-group-text" for="tailTwitches">Tail twitches</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
-                               id="tailTwitches">
+                        <select class="custom-select" id="tailTwitches">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Approaches</span>
+                            <label class="input-group-text" for="approaches">Approaches</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="approaches">
+                        <select class="custom-select" id="approaches">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Indifferent</span>
+                            <label class="input-group-text" for="indifferent">Indifferent</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
-                               id="indifferent">
+                        <select class="custom-select" id="indifferent">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
                     </div>
 
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Runs from</span>
+                            <label class="input-group-text" for="runsFrom">Runs from</label>
                         </div>
-                        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="runsFrom">
+                        <select class="custom-select" id="runsFrom">
+                            <option value=1>YES</option>
+                            <option value=0>NO</option>
+                        </select>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeCreate">Close</button>
@@ -417,16 +466,16 @@
 
     {% if is_paginated %}
     <div class="pagination-simple">
-      <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
-      {% endif %}
-      <!-- 显示当前页面信息 -->
-      <span class="current">第 {{ page_obj.number }} 页 / 共 {{ paginator.num_pages }} 页</span>
-      <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
-      {% endif %}
+        <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Last Page</a>
+        {% endif %}
+        <!-- 显示当前页面信息 -->
+        <span class="current">Page {{ page_obj.number }}  /  {{ paginator.num_pages }} </span>
+        <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next Page</a>
+        {% endif %}
     </div>
     {% endif %}
 
@@ -480,6 +529,8 @@ var UpdateInfo = function(id) {
             if(data.status == 'success'){
                 $('#close').click()
                 location.reload()
+            }else{
+                alert('type incorrect')
             }
         }
     });
@@ -498,6 +549,8 @@ var createInfo = function() {
             if(data.status == 'success'){
                 $('#closeCreate').click()
                 location.reload()
+            }else{
+                alert('type incorrect')
             }
         }
     });
@@ -533,6 +586,7 @@ var getInfoFromPage = function(info) {
 }
 
 var getCreateInfoFromPage = function(info) {
+    console.log('info123:',$('#latitudeCreate').val())
     var info = {
         x: $('#latitudeCreate').val(),
         y: $('#longitudeCreate').val(),
@@ -540,23 +594,24 @@ var getCreateInfoFromPage = function(info) {
         shift: $('#shiftCreate').val(),
         date: $('#dateCreate').val(),
         age: $('#ageCreate').val(),
-        primary_fur_color :$('primaryFurColor').val(),
-        location :$('location').val(),
-        specific_location :$('specificLocation').val(),
-        running :$('running').val(),
-        chasing :$('chasing').val(),
-        climbing :$('climbing').val(),
-        eating :$('eating').val(),
-        foraging :$('foraging').val(),
-        other_activities :$('otherActivities').val(),
-        kuks :$('kuks').val(),
-        moans :$('moans').val(),
-        tail_flags :$('tailFlags').val(),
-        tail_twitches :$('tailTwitches').val(),
-        approaches :$('approaches').val(),
-        indifferent :$('indifferent').val(),
-        runs_from :$('runsFrom').val(),
+        primary_fur_color :$('#primaryFurColor').val(),
+        location :$('#location').val(),
+        specific_location :$('#specificLocation').val(),
+        running :$('#running').val(),
+        chasing :$('#chasing').val(),
+        climbing :$('#climbing').val(),
+        eating :$('#eating').val(),
+        foraging :$('#foraging').val(),
+        other_activities :$('#otherActivities').val(),
+        kuks :$('#kuks').val(),
+        moans :$('#moans').val(),
+        tail_flags :$('#tailFlags').val(),
+        tail_twitches :$('#tailTwitches').val(),
+        approaches :$('#approaches').val(),
+        indifferent :$('#indifferent').val(),
+        runs_from :$('#runsFrom').val(),
     }
+    console.log('info:',info)
     return info
 }
 
@@ -564,25 +619,25 @@ var clearCreateInfo = function(info) {
     $('#latitudeCreate').val('')
     $('#longitudeCreate').val('')
     $('#uniqueSquirrelIDCreate').val('')
-    $('#shiftCreate').val('')
+    $('#shiftCreate').val('PM')
     $('#dateCreate').val('')
-    $('#ageCreate').val('')
-    $('primaryFurColor').val('')
-    $('location').val('')
-    $('specificLocation').val('')
-    $('running').val('')
-    $('chasing').val('')
-    $('climbing').val('')
-    $('eating').val('')
-    $('foraging').val('')
-    $('otherActivities').val('')
-    $('kuks').val('')
-    $('moans').val('')
-    $('tailFlags').val('')
-    $('tailTwitches').val('')
-    $('approaches').val('')
-    $('indifferent').val('')
-    $('runsFrom').val('')
+    $('#ageCreate').val('Adult')
+    $('#primaryFurColor').val('')
+    $('#location').val('Ground Plane')
+    $('#specificLocation').val('')
+    $('#running').val('1')
+    $('#chasing').val('1')
+    $('#climbing').val('1')
+    $('#eating').val('1')
+    $('#foraging').val('1')
+    $('#otherActivities').val('')
+    $('#kuks').val('1')
+    $('#moans').val('1')
+    $('#tailFlags').val('1')
+    $('#tailTwitches').val('1')
+    $('#approaches').val('1')
+    $('#indifferent').val('1')
+    $('#runsFrom').val('1')
 }
 
 $(document).on("click",".edit",function(){
@@ -597,7 +652,11 @@ $(document).on("click",".view",function(){
 
 $(document).on("click","#save",function(){
     var id = $('#uniqueSquirrelID').val()
-    UpdateInfo(id)
+    if (id != ""){
+        UpdateInfo(id)
+    }else{
+        alert("unique ID could not be null")
+    }
 });
 
 $(document).on("click","#addSighting",function(){
@@ -605,8 +664,12 @@ $(document).on("click","#addSighting",function(){
 });
 
 $(document).on("click","#create",function(){
-    clearCreateInfo()
-    createInfo()
+    var id = $('#uniqueSquirrelIDCreate').val()
+    if (id != ""){
+        createInfo()
+    }else{
+        alert("unique ID could not be null")
+    }
 });
 
 

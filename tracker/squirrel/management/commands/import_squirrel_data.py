@@ -30,11 +30,10 @@ class Command(BaseCommand):
         parser.add_argument('import_squirrel_data', type=str)
 
     def handle(self, *args, **options):
-
         path = options.get('import_squirrel_data')
         csv_reader = csv.reader(open(path))
         for index, row in enumerate(csv_reader):
-            if index != 0 and index < 10:
+            if index != 0:
                 sq_info = row
                 create_dict = {
                     "x": sq_info[0],

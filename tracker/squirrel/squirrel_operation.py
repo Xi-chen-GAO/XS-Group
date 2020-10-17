@@ -11,7 +11,7 @@ class SquirrelOperation:
         return squirrel
 
     def _is_date_legal(self, date):
-        if date and len(date) == 8:
+        if date:
             return True
         else:
             return False
@@ -46,12 +46,14 @@ class SquirrelOperation:
             date = s.date
             primary_fur_color = s.primary_fur_color
             if self._is_date_legal(date) and self._is_color_legal(primary_fur_color):
+                date_str = str(date)
                 all_date.append(date)
                 all_color.append(primary_fur_color)
-                stats_info.setdefault(date, {})
-                stats_info[date].setdefault(primary_fur_color, 0)
-                stats_info[date][primary_fur_color] += 1
+                stats_info.setdefault(date_str, {})
+                stats_info[date_str].setdefault(primary_fur_color, 0)
+                stats_info[date_str][primary_fur_color] += 1
         all_date = sorted(list(set(all_date)))
+        all_date = [str(n) for n in all_date]
         all_color = set(all_color)
 
         color_info_list = []
