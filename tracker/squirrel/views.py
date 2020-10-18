@@ -22,7 +22,7 @@ def index(request):
 
 def map(request):
     # limit return
-    sightings = Squirrel.objects.all()[:50]
+    sightings = Squirrel.objects.all()[:100]
     context = {
         'sightings': sightings
     }
