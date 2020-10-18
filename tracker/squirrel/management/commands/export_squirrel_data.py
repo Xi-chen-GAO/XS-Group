@@ -28,7 +28,13 @@ class Command(BaseCommand):
         line_list = [title]
         for sq in sqs:
             lat_long = "POINT ({} {})".format(sq.x, sq.y)
-            date = '{}'.format(sq.date)
+            month = sq.date.month
+            if len(str(month)) == 1:
+                month = '0{}'.format(month)
+            day = sq.date.day
+            if len(str(day)) == 1:
+                day = '0{}'.format(day)
+            date = '{}{}{}'.format(month, day, sq.date.year)
             line = [sq.x, sq.y, sq.unique_squirrel_id, sq.hectare, sq.shift, date, sq.hectare_squirrel_number,
                     sq.age, sq.primary_fur_color, sq.highlight_fur_color, sq.combination_of_primary_and_highlight_color,
                     sq.color_notes, sq.location, sq.above_ground_sighter_measurement, sq.specific_location, sq.running,
