@@ -1,6 +1,4 @@
 # Create your views here.
-import os
-import csv
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from squirrel.models import Squirrel
@@ -62,6 +60,7 @@ def squirrel(request, unique_squirrel_id):
                 'status': 'success',
             }
         except Exception as e:
+            print('Error:', e)
             res = {
                 'status': 'failed',
             }
@@ -75,12 +74,11 @@ def stats(request):
 
     age_info_list, all_location = squirrel_operation.get_squirrel_age_by_location(squirrels)
     state_info = {
-        'color_info_list':color_info_list,
+        'color_info_list': color_info_list,
         'all_date': all_date,
         'age_info_list': age_info_list,
         'all_location': all_location,
     }
-    # return JsonResponse(state_info)
     return render(request, 'squirrel/statistics.html', state_info)
 
 
@@ -111,12 +109,14 @@ def squirrel_add(request):
 
     try:
         squirrel_operation.create(x, y, unique_squirrel_id, shift, date, age, primary_fur_color, location,
-                                  specific_location, running, chasing, climbing, eating, foraging, other_activities, kuks,
+                                  specific_location, running, chasing, climbing, eating, foraging, other_activities,
+                                  kuks,
                                   moans, tail_flags, tail_twitches, approaches, indifferent, runs_from)
         res = {
             'status': 'success',
         }
     except Exception as e:
+        print('Error:', e)
         res = {
             'status': 'failed',
         }
