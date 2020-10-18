@@ -2,6 +2,9 @@ import csv
 from datetime import datetime
 from django.core.management.base import BaseCommand
 from squirrel.models import Squirrel
+from squirrel.utils import CSV_Opertion
+
+csv_operation = CSV_Opertion()
 
 
 class Parser:
@@ -31,8 +34,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         path = options.get('import_squirrel_data')
-        csv_reader = csv.reader(open(path))
-        for index, row in enumerate(csv_reader):
+        lines = csv_operation.read(path)
+        for index, row in enumerate(lines):
             if index != 0:
                 sq_info = row
                 create_dict = {

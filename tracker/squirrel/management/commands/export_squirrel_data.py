@@ -1,6 +1,9 @@
 import csv
 from django.core.management.base import BaseCommand
 from squirrel.models import Squirrel
+from squirrel.utils import CSV_Opertion
+
+csv_operation = CSV_Opertion()
 
 
 class Command(BaseCommand):
@@ -13,12 +16,7 @@ class Command(BaseCommand):
         path = options.get('export_squirrel_data')
 
         data = self.get_lines()
-        f = open(path, 'w')
-        writer = csv.writer(f)
-        for i in data:
-            writer.writerow(i)
-        f.close()
-
+        csv_operation.write(path, data)
         self.stdout.write(self.style.SUCCESS('Successfully output data'))
 
     def get_lines(self):
