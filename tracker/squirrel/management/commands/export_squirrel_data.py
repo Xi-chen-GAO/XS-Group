@@ -1,5 +1,4 @@
 import csv
-from datetime import datetime
 from django.core.management.base import BaseCommand
 from squirrel.models import Squirrel
 
@@ -32,38 +31,12 @@ class Command(BaseCommand):
                  'Lat/Long', ]
         line_list = [title]
         for sq in sqs:
-            line = []
-            line.append(sq.x)
-            line.append(sq.y)
-            line.append(sq.unique_squirrel_id)
-            line.append(sq.hectare)
-            line.append(sq.shift)
-            line.append(sq.date)
-            line.append(sq.hectare_squirrel_number)
-            line.append(sq.age)
-            line.append(sq.primary_fur_color)
-            line.append(sq.highlight_fur_color)
-            line.append(sq.combination_of_primary_and_highlight_color)
-            line.append(sq.color_notes)
-            line.append(sq.location)
-            line.append(sq.above_ground_sighter_measurement)
-            line.append(sq.specific_location)
-            line.append(sq.running)
-            line.append(sq.chasing)
-            line.append(sq.climbing)
-            line.append(sq.eating)
-            line.append(sq.foraging)
-            line.append(sq.other_activities)
-            line.append(sq.kuks)
-            line.append(sq.quaas)
-            line.append(sq.moans)
-            line.append(sq.tail_flags)
-            line.append(sq.tail_twitches)
-            line.append(sq.approaches)
-            line.append(sq.indifferent)
-            line.append(sq.runs_from)
-            line.append(sq.other_interactions)
             lat_long = "POINT ({} {})".format(sq.x, sq.y)
-            line.append(lat_long)
+            line = [sq.x, sq.y, sq.unique_squirrel_id, sq.hectare, sq.shift, sq.date, sq.hectare_squirrel_number,
+                    sq.age, sq.primary_fur_color, sq.highlight_fur_color, sq.combination_of_primary_and_highlight_color,
+                    sq.color_notes, sq.location, sq.above_ground_sighter_measurement, sq.specific_location, sq.running,
+                    sq.chasing, sq.climbing, sq.eating, sq.foraging, sq.other_activities, sq.kuks, sq.quaas, sq.moans,
+                    sq.tail_flags, sq.tail_twitches, sq.approaches, sq.indifferent, sq.runs_from, sq.other_interactions,
+                    lat_long]
             line_list.append(line)
         return line_list
