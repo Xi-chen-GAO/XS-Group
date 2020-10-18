@@ -1,4 +1,3 @@
-import csv
 from django.core.management.base import BaseCommand
 from squirrel.models import Squirrel
 from squirrel.utils import CSV_Opertion
@@ -14,7 +13,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         path = options.get('export_squirrel_data')
-
         data = self.get_lines()
         csv_operation.write(path, data)
         self.stdout.write(self.style.SUCCESS('Successfully output data'))
@@ -30,7 +28,8 @@ class Command(BaseCommand):
         line_list = [title]
         for sq in sqs:
             lat_long = "POINT ({} {})".format(sq.x, sq.y)
-            line = [sq.x, sq.y, sq.unique_squirrel_id, sq.hectare, sq.shift, sq.date, sq.hectare_squirrel_number,
+            date = '{}'.format(sq.date)
+            line = [sq.x, sq.y, sq.unique_squirrel_id, sq.hectare, sq.shift, date, sq.hectare_squirrel_number,
                     sq.age, sq.primary_fur_color, sq.highlight_fur_color, sq.combination_of_primary_and_highlight_color,
                     sq.color_notes, sq.location, sq.above_ground_sighter_measurement, sq.specific_location, sq.running,
                     sq.chasing, sq.climbing, sq.eating, sq.foraging, sq.other_activities, sq.kuks, sq.quaas, sq.moans,

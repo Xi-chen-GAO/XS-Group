@@ -70,8 +70,8 @@ def squirrel(request, unique_squirrel_id):
 def stats(request):
     squirrels = squirrel_operation.get_all_squirrel()
     color_info_list, all_date = squirrel_operation.get_squirrel_color_by_day(squirrels)
-    squirrel_operation.get_squirrel_age_by_location(squirrels)
 
+    squirrel_operation.get_squirrel_age_by_location(squirrels)
     age_info_list, all_location = squirrel_operation.get_squirrel_age_by_location(squirrels)
     state_info = {
         'color_info_list': color_info_list,

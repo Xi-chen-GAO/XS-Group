@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from squirrel.models import Squirrel
 from squirrel.utils import CSV_Opertion
 
+# https://docs.djangoproject.com/zh-hans/2.2/howto/custom-management-commands/
 csv_operation = CSV_Opertion()
 
 

@@ -52,6 +52,7 @@ class SquirrelOperation:
                 stats_info.setdefault(date_str, {})
                 stats_info[date_str].setdefault(primary_fur_color, 0)
                 stats_info[date_str][primary_fur_color] += 1
+        # 去重+排序
         all_date = sorted(list(set(all_date)))
         all_date = [str(n) for n in all_date]
         all_color = set(all_color)

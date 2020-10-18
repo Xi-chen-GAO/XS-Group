@@ -48,5 +48,3 @@ On our django based webpage, the location of squirrel sightings are dispalyed on
   python manage.py runserver
   ```
 
-  
-
