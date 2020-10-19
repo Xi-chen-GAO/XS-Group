@@ -138,3 +138,11 @@ python manage.py runserver
 -Group name: XS Group, Section 1  
 -UNIs: [xg2352, ss6159]  
 -Server link: since deploy is not required in this project, there's no server link.  
+
+
+
+***Resources***
+
+- [Bootstrap](https://v4.bootcss.com/)
+- [echarts](https://echarts.apache.org/en/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts)
+
