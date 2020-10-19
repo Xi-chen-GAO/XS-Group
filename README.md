@@ -135,6 +135,6 @@ python manage.py runserver
 
 ***Group information***
 
--Group name: XS Group, Section 1
--UNIs: [xg2352, ss6159]
--Server link: since deploy is not required in this project, there's no server link.
+-Group name: XS Group, Section 1  
+-UNIs: [xg2352, ss6159]  
+-Server link: since deploy is not required in this project, there's no server link.  
