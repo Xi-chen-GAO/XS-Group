@@ -12,13 +12,13 @@ The import and export commands were achieved by creating two customized commands
 
 ***Views:***
 
--map 
+-Map 
 
 This view shows a map which displays 100 locations of squirrel sightings on an OpenStreets map. We chose the latitude and longitude data from the database as our input and used the given template to plot the points.
 
 ![img](https://github.com/Xi-chen-GAO/XS-Group/blob/main/img/map.png) 
 
--view
+-View
 
 This view lists the unique squirrel ID and date of all squirrel sightings. Since there are more than 3000 records of squirrel sightings, it would be dauting to show all the records in one huge table. We employed the Django function “ListView” to separate records in 303 pages with 10 records in one page. Each record has a unique number in the beginning to identify it. Users could click “Next Page” button to see all squirrel sightings. 
 
@@ -34,7 +34,7 @@ When users click the “view” button, a new window will pop up, which is built
 
  
 
--update
+-Update
 
  
 
@@ -54,7 +54,7 @@ When users click the “update” button, a new window will be pop up (similarly
 
  
 
--add
+-Add
 
  
 
@@ -70,7 +70,7 @@ When clicking the “Add sighting” button, users will be directed to a new win
 
  
 
--stat
+-Stat
 
 This view displays general statistics analysis of squirrel sightings. We used “ECharts” to draw these two graphs.
 
